@@ -1,0 +1,154 @@
+swagger: "2.0"
+info:
+  title: CD(continuous delivery) docker swarm
+  description: docker deployment services
+  version: 1.0.0
+host: cd.example.com
+basePath: /
+schemes:
+  - https
+
+paths:
+  /updateServiceLatest:
+    post:
+      summary: update service to latest image version
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                token:
+                  type: string
+              example:
+                name: dev-backend
+                token: <TOKEN>
+      responses:
+        '200':
+          description: service updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  status:
+                    type: string
+                  message:
+                    type: string
+                example:
+                  name: dev-backend
+                  status: ok
+                  message: ""
+        '400':
+          description: wrong service name.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  status:
+                    type: string
+                  message:
+                    type: string
+                example:
+                  name: dev-backend
+                  status: failed
+                  message: service does not exist!
+        '401':
+          description: unauthorized, token is invalid!.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  status:
+                    type: string
+                  message:
+                    type: string
+                example:
+                  name: dev-backend
+                  status: failed
+                  message: token is invalid!
+
+  /UpdateServiceWithImage:
+    post:
+      summary: update service to with selected image
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                token:
+                  type: string
+                image:
+                  type: string
+              example:
+                name: dev-backend
+                token: <TOKEN>
+                image: reg.example.com/dev-imagename:latest
+
+      responses:
+        '200':
+          description: service updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  status:
+                    type: string
+                  message:
+                    type: string
+                example:
+                  name: dev-backend
+                  status: ok
+                  message: ""
+        '400':
+          description: wrong service name.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  status:
+                    type: string
+                  message:
+                    type: string
+                example:
+                  name: dev-backend
+                  status: failed
+                  message: service does not exist!
+        '401':
+          description: unauthorized, token is invalid!.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  status:
+                    type: string
+                  message:
+                    type: string
+                example:
+                  name: dev-backend
+                  status: failed
+                  message: token is invalid!
+
+

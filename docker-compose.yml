@@ -1,0 +1,24 @@
+version: "3.3"
+services:
+  go:
+    build: .
+    volumes:
+      - cd-docker_data:/_configFiles/
+      - /var/run/docker.sock:/var/run/docker.sock
+#    networks:
+#      - traefik_network
+    configs:
+      - source: cd-docker_config # auth for private repositories; READ HERE: https://stackoverflow.com/a/45671103/12286948
+        target: /root/.docker/config.json
+
+configs:
+  cd-docker_config:
+    external:
+      name: cd-docker_config
+
+volumes:
+  cd-docker_data:
+
+#networks:
+#  traefik_network:
+#    external: true

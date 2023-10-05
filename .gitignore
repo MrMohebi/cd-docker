@@ -1,0 +1,5 @@
+.idea
+*/vendor/
+_configFiles/config.ini
+
+cd-docker
